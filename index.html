@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Títol de l'arxiu antic -->
+    <title>WooperSindicat - Solucions Tecnològiques Professionals</title>
+    
+    <!-- Estils i fonts del NOU disseny -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44B5;
+            --accent: #FF6584;
+            --dark: #1A1A2E;
+            --light: #F8F9FA;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.15) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        /* Header Styles (Adaptat) */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem; /* Reduït espaiat per a més enllaços */
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem; /* Reduïda font per a més enllaços */
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Botó Menú Mòbil (Copiat de l'arxiu antic) */
+        .mobile-menu-btn {
+            display: none; /* Ocult per defecte en escriptori */
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        /* Menú Mòbil (desplegable) (Copiat i adaptat) */
+        .mobile-menu {
+            display: none; /* Ocult per defecte */
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            position: absolute;
+            top: 100%; /* Sota el header */
+            left: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mobile-menu ul {
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .mobile-menu ul li {
+            margin: 0;
+        }
+
+        /* Hero Section (Contingut antic, estil nou) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem; /* Ajustat */
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.8s forwards;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.1s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            max-width: 700px;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.4s forwards;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Seccions Genèriques (Features, Portfolio, etc.) */
+        .section {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+        .section-darker {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Serveis (Features Section) (Contingut antic, estil nou) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* Secció d'Inventari (NOVA, basada en estil antic però adaptada al fosc) */
+        .inventory-content {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .inventory-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Estils per a formularis (inputs, selects, buttons) adaptats */
+        .dark-input, .dark-select, .dark-textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        .dark-input::placeholder, .dark-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .dark-input:focus, .dark-select:focus, .dark-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+        }
+        .dark-select option {
+            background: #302b63;
+            color: var(--light);
+        }
+        .inventory-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-small-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 10px rgba(108, 99, 255, 0.2);
+        }
+        .btn-small-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(108, 99, 255, 0.3);
+        }
+        .btn-small-ghost {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-small-ghost:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Taula d'Inventari (Estil fosc) */
+        .inventory-table-wrapper {
+            overflow-y: auto;
+            max-height: 520px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .inventory-table thead th {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(5px);
+        }
+        .inventory-table tbody tr {
+            transition: background 0.3s ease;
+        }
+        .inventory-table tbody tr:hover {
+            background: rgba(108, 99, 255, 0.1);
+        }
+        .inventory-table tbody td {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        .inventory-table .btn-action {
+            background: none;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .btn-action.edit { color: var(--primary); }
+        .btn-action.edit:hover { color: #a09aff; }
+        .btn-action.del { color: var(--accent); }
+        .btn-action.del:hover { color: #ff8baa; }
+
+        /* Stats (Estil fosc) */
+        .inventory-stats {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .inventory-stats h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+        .inventory-stats div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .inventory-stats span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .inventory-stats strong {
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        /* Insígnies d'estat (Copiades i adaptades) */
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .status-operatiu { background-color: rgba(22, 163, 74, 0.2); color: #4ade80; }
+        .status-reparacio { background-color: rgba(234, 179, 8, 0.2); color: #facc15; }
+        .status-baixat { background-color: rgba(220, 38, 38, 0.2); color: #f87171; }
+        
+
+        /* Projectes (Portfolio Section) (Contingut antic, estil nou) */
+        .portfolio-grid {
+            display: grid;
+            /* Modificat per a 2 projectes, centrats */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 800px;
+            margin: 3rem auto 0;
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            transform: scale(1);
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(108, 99, 255, 0.8), rgba(255, 101, 132, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Sobre Nosaltres (NOVA SECCIÓ, basada en estil antic i nou) */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            text-align: left;
+            margin-top: 3rem;
+        }
+        .about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .about-text p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Secció Contacte (NOVA SECCIÓ, basada en estil antic i nou) */
+        .contact-form-wrapper {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .contact-form-wrapper form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-form-wrapper .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer (Contingut antic, estil nou) */
+        footer {
+            padding: 5rem 5% 3rem;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            text-align: left; /* Alineat a l'esquerra per consistència */
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-column p, .footer-column li {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .footer-column ul {
+            list-style: none;
+        }
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        .footer-column i {
+            margin-right: 0.75rem;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations (Del nou disseny) */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-55%) translateX(10px); }
+            100% { transform: translateY(-50%) translateX(0); }
+        }
+        
+        /* Floating elements (Del nou disseny) */
+        .floating {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .floating:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 5%; animation: float 15s infinite ease-in-out; }
+        .floating:nth-child(2) { width: 200px; height: 200px; bottom: 20%; right: 10%; animation: float 12s infinite ease-in-out 2s; }
+        .floating:nth-child(3) { width: 150px; height: 150px; top: 40%; right: 20%; animation: float 10s infinite ease-in-out 4s; }
+
+
+        /* Responsive Design (Adaptat) */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-image { width: 40%; }
+            .inventory-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-image { order: -1; margin-bottom: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1.5rem 5%; }
+            nav ul { display: none; } /* Ocultar menú escriptori */
+            .mobile-menu-btn { display: block; } /* Mostrar botó hamburguesa */
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px; /* Més espai per al header */
+                min-height: auto;
+                padding-bottom: 4rem;
+            }
+            .hero-content { margin-bottom: 3rem; }
+            .hero-image {
+                position: relative;
+                width: 90%;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 0 auto;
+                animation: none; /* Treure animació float en mòbil */
+            }
+            .hero-image img { animation: none; }
+            .hero-btns { justify-content: center; }
+            .section-title { font-size: 2.5rem; }
+            .inventory-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-btns { flex-direction: column; gap: 1rem; }
+            .btn { width: 100%; }
+            .section { padding: 6rem 5%; }
+            .inventory-content { padding: 1.5rem; }
+            .contact-form-wrapper { padding: 2rem; }
+        }
+        
+        /* Estils dels Modals (Copiats de l'arxiu antic i adaptats al fosc) */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 12, 41, 0.7); /* Fons fosc */
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: none; /* Canviat a none */
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal-panel {
+            background: #1e1b4b; /* Fons del panell més fosc */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        /* Classe per mostrar el modal */
+        .modal-overlay.flex {
+            display: flex;
+        }
+        .modal-panel.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        /* Estils específics per a alerta (vermell) */
+        .modal-icon-alert { background-color: rgba(220, 38, 38, 0.2); }
+        .modal-icon-alert svg { color: #f87171; }
+        /* Estils específics per a confirmació (groc) */
+        .modal-icon-confirm { background-color: rgba(234, 179, 8, 0.2); }
+        .modal-icon-confirm svg { color: #facc15; }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+        .modal-message {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Floating Elements (del nou disseny) -->
+    <div class="floating"></div>
+    <div class="floating"></div>
+    <div class="floating"></div>
+    
+    <!-- Header (Adaptat amb contingut antic) -->
+    <header>
+        <a href="#inici" class="logo">WooperSindicat</a>
+        <nav>
+            <!-- Menú Escriptori (Contingut antic) -->
+            <ul>
+                <li><a href="#inici">Inici</a></li>
+                <li><a href="#serveis">Serveis</a></li>
+                <li><a href="#inventari">Inventari</a></li>
+                <li><a href="#projectes">Projectes</a></li>
+                <li><a href="#sobre-nosaltres">Sobre Nosaltres</a></li>
+                <li><a href="#contacte">Contacte</a></li>
+            </ul>
+        </nav>
+        <!-- Botó Menú Mòbil (Afegit de l'arxiu antic) -->
+        <button id="mobile-menu-btn" class="mobile-menu-btn">
+            <i id="menu-icon-open" class="fas fa-bars"></i>
+            <i id="menu-icon-close" class="fas fa-times" style="display: none;"></i>
+        </button>
+    </header>
+    
+    <!-- Menú Mòbil (desplegable) (Afegit de l'arxiu antic) -->
+    <div id="mobile-menu" class="mobile-menu">
+        <ul>
+            <li><a href="#inici">Inici</a></li>
+            <li><a href="#serveis">Serveis</a></li>
+            <li><a href="#inventari">Inventari</a></li>
+            <li><a href="#projectes">Projectes</a></li>
+            <li><a href="#sobre-nosaltres">Sobre Nosaltres</a></li>
+            <li><a href="#contacte">Contacte</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section (Contingut antic) -->
+    <section class="hero" id="inici">
+        <div class="hero-content">
+            <h1>Solucions <span>Tecnològiques</span> Professionals</h1>
+            <p>Inventari, manteniment i gestió d'equips informàtics per a empreses i institucions educatives.</p>
+            <div class="hero-btns">
+                <a href="#serveis" class="btn btn-primary">Els Nostres Serveis</a>
+                <a href="#inventari" class="btn btn-secondary">Gestió d'Inventari</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Imatge placeholder adaptada al tema -->
+            <img src="https://placehold.co/700x500/1A1A2E/6C63FF?text=Wooper+Sindicat&font=montserrat" alt="Solucions Tecnològiques">
+        </div>
+    </section>
+
+    <!-- Services Section (Contingut antic, estil nou) -->
+    <section class="section" id="serveis">
+        <h2 class="section-title">Els Nostres Serveis</h2>
+        <p class="section-subtitle">Oferim solucions tecnològiques completes per a les necessitats del vostre centre o empresa.</p>
+        
+        <div class="features-grid">
+            <!-- Targeta 1 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-clipboard-list"></i></div>
+                <h3>Inventari Digital</h3>
+                <p>Creem un inventari complet i actualitzat de tots els vostres equips informàtics amb informació detallada.</p>
+            </div>
+            <!-- Targeta 2 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-tools"></i></div>
+                <h3>Manteniment i Reparació</h3>
+                <p>Diagnosi, reparació i substitució de components per mantenir els vostres equips en òptimes condicions.</p>
+            </div>
+            <!-- Targeta 3 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Instal·lació de S.O.</h3>
+                <p>Configuració de sistemes operatius duals (Windows i Linux) amb tots els controladors i programari necessari.</p>
+            </div>
+            <!-- Targeta 4 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Configuració de Xarxes</h3>
+                <p>Disseny, implementació i manteniment d'infraestructures de xarxa per a entorns educatius i empresarials.</p>
+            </div>
+            <!-- Targeta 5 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-print"></i></div>
+                <h3>Configuració de Perifèrics</h3>
+                <p>Instal·lació i configuració d'impressores, projectors i altres dispositius perifèrics en tots els equips.</p>
+            </div>
+            <!-- Targeta 6 (Antiga) -->
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-clone"></i></div>
+                <h3>Clonatge i Desplegament</h3>
+                <p>Creació d'imatges clonables per a una distribució eficient de sistemes en múltiples equips.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Inventory Section (Contingut antic, estil fosc adaptat) -->
+    <section class="section section-darker" id="inventari">
+        <h2 class="section-title">Sistema d'Inventari</h2>
+        <p class="section-subtitle">Eina professional per registrar, diagnosticar i gestionar tots els vostres equips informàtics.</p>
+        
+        <div class="inventory-content">
+            <div class="inventory-grid">
+                <!-- Columna Taula (Antiga) -->
+                <div>
+                    <h3 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Taula d'inventari</h3>
+                    <div class="inventory-controls">
+                        <input id="search" placeholder="Cerca per ID, CPU, estat..." class="dark-input" style="flex-grow: 1;"/>
+                        <button class="btn-small btn-small-ghost" id="clearSearch">Netejar</button>
+                        <button class="btn-small btn-small-primary" id="exportCsv">Exportar CSV</button>
+                        <button class="btn-small btn-small-ghost" id="importSample">Mostres</button>
+                    </div>
+
+                    <div class="inventory-table-wrapper">
+                        <table id="tbl" class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Estat</th>
+                                    <th>CPU</th>
+                                    <th>RAM</th>
+                                    <th>Disc</th>
+                                    <th>Ubicació</th>
+                                    <th>Accions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Filer s'ompliran amb JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Columna Formulari i Stats (Antiga) -->
+                <aside>
+                    <div style="background: rgba(0, 0, 0, 0.2); border-radius: 15px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+                        <h3 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Afegir / Editar</h3>
+                        <form id="form" class="inventory-form">
+                            <input id="id" placeholder="Identificador (p.ex. PC-01)" required class="dark-input">
+                            <select id="stat" class="dark-select">
+                                <option value="operatiu">Operatiu</option>
+                                <option value="reparacio">En reparació</option>
+                                <option value="baixat">Baixat</option>
+                            </select>
+                            <input id="cpu" placeholder="CPU (p.ex. Intel i5-2400)" class="dark-input">
+                            <input id="ram" placeholder="RAM (p.ex. 8 GB)" class="dark-input">
+                            <input id="disc" placeholder="Disc (p.ex. 256 GB SSD)" class="dark-input">
+                            <input id="ubicacio" placeholder="Ubicació / aula" class="dark-input">
+                            <textarea id="notes" rows="3" placeholder="Observacions, possibles millores..." class="dark-textarea"></textarea>
+                            <div class="flex gap-2" style="gap: 0.5rem; display: flex;">
+                                <button class="btn-small btn-small-primary" type="submit" style="flex: 1;">Guardar</button>
+                                <button type="button" class="btn-small btn-small-ghost" id="reset" style="flex: 1;">Netejar</button>
+                            </div>
+                        </form>
+
+                        <div class="inventory-stats">
+                            <h4>Informes ràpids</h4>
+                            <div id="stats">
+                                <!-- Estadístiques s'ompliran amb JS -->
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Contingut antic, estil nou 'portfolio') -->
+    <section class="section" id="projectes">
+        <h2 class="section-title">Projectes Recents</h2>
+        <p class="section-subtitle">Alguns dels nostres treballs més destacats en entorns educatius i empresarials.</p>
+        
+        <div class="portfolio-grid">
+            <!-- Projecte 1 (Antic) -->
+            <div class="portfolio-item">
+                <img src="https://placehold.co/600x400/0284c7/white?text=Empresa+BCN&font=inter" alt="Projecte 1">
+                <div class="portfolio-overlay">
+                    <h3>Empresa Tecnològica BCN</h3>
+                    <p>Inventari i posada a punt de 50 equips informàtics.</p>
+                    <a href="#contacte" class="btn btn-secondary">Sol·licitar pressupost</a>
+                </div>
+            </div>
+            <!-- Projecte 2 (Antic) -->
+            <div class="portfolio-item">
+                <img src="https://placehold.co/600x400/059669/white?text=Institut+Tecnològic&font=inter" alt="Projecte 2">
+                <div class="portfolio-overlay">
+                    <h3>Institut Tecnològic</h3>
+                    <p>Implementació completa d'una aula multimèdia amb 25 llocs.</p>
+                    <a href="#contacte" class="btn btn-secondary">Sol·licitar pressupost</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (NOVA SECCIÓ, contingut antic) -->
+    <section class="section section-darker" id="sobre-nosaltres">
+        <h2 class="section-title">Sobre WooperSindicat</h2>
+        <p class="section-subtitle">La nostra experiència al vostre servei.</p>
+        
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Innovació i confiança al servei de la tecnologia</h2>
+                <p>Som una empresa especialitzada en solucions tecnològiques per a empreses i institucions educatives. Oferim serveis complets d'inventari, manteniment i gestió d'equips informàtics.</p>
+                <p>El nostre equip està format per professionals amb formació específica en sistemes, xarxes i gestió de projectes tecnològics, capaços d'adaptar-nos a les necessitats específiques de cada client.</p>
+                <a href="#contacte" class="btn btn-primary" style="margin-top: 1.5rem;">Contacta'ns</a>
+            </div>
+            <div class="about-image">
+                <img src="https://placehold.co/600x500/1A1A2E/F8F9FA?text=El+Nostre+Equip&font=montserrat" alt="El nostre equip">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section (NOVA SECCIÓ, contingut antic) -->
+    <section class="section" id="contacte">
+        <h2 class="section-title">Contacta amb Nosaltres</h2>
+        <p class="section-subtitle">Estem a la vostra disposició per a qualsevol consulta o projecte que vulgueu desenvolupar.</p>
+        
+        <div class="contact-form-wrapper">
+            <form>
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" class="dark-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correu electrònic</label>
+                    <input type="email" id="email" class="dark-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Empresa/Institució</label>
+                    <input type="text" id="company" class="dark-input">
+                </div>
+                <div class="form-group">
+                    <label for="message">Missatge</label>
+                    <textarea id="message" class="dark-textarea" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Missatge</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer (Contingut antic, estil nou) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>WooperSindicat</h3>
+                <p>Solucions tecnològiques integrals per a educació i empresa.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Navegació</h3>
+                <ul>
+                    <li><a href="#inici">Inici</a></li>
+                    <li><a href="#serveis">Serveis</a></li>
+                    <li><a href="#inventari">Inventari</a></li>
+                    <li><a href="#projectes">Projectes</a></li>
+                    <li><a href="#sobre-nosaltres">Sobre Nosaltres</a></li>
+                    <li><a href="#contacte">Contacte</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Serveis Clau</h3>
+                <ul>
+                    <li><a href="#serveis">Inventari Digital</a></li>
+                    <li><a href="#serveis">Manteniment i Reparació</a></li>
+                    <li><a href="#serveis">Instal·lació de S.O.</a></li>
+                    <li><a href="#serveis">Configuració de Xarxes</a></li>
+                    <li><a href="#serveis">Clonatge i Desplegament</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contacte</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i>info@woopersindicat.cat</li>
+                    <li><i class="fas fa-phone"></i>+34 123 456 789</li>
+                    <li><i class="fas fa-map-marker-alt"></i>Barcelona, Catalunya</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 WooperSindicat. Tots els drets reservats.</p>
+        </div>
+    </footer>
+
+    <!-- Modals (HTML de l'arxiu antic, adaptat) -->
+    <div id="alert-modal" class="modal-overlay">
+      <div class="modal-panel" data-modal-panel>
+        <div class="modal-icon-wrapper modal-icon-alert">
+            <svg class="w-7 h-7" style="width: 3rem; height: 3rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+        </div>
+        <h3 id="alert-title" class="modal-title">Error</h3>
+        <p id="alert-message" class="modal-message">Missatge d'error.</p>
+        <button id="alert-close" class="btn btn-primary" style="width: 100%;">Tancar</button>
+      </div>
+    </div>
+    
+    <div id="confirm-modal" class="modal-overlay">
+      <div class="modal-panel" data-modal-panel>
+        <div class="modal-icon-wrapper modal-icon-confirm">
+            <svg class="w-7 h-7" style="width: 3rem; height: 3rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" /></svg>
+        </div>
+        <h3 id="confirm-title" class="modal-title">Esteu segurs?</h3>
+        <p id="confirm-message" class="modal-message">Aquesta acció no es pot desfer.</p>
+        <div class="flex" style="display: flex; gap: 1rem;">
+            <button id="confirm-cancel" class="btn btn-secondary" style="flex: 1;">Cancel·lar</button>
+            <button id="confirm-ok" class="btn btn-primary" style="flex: 1; background: linear-gradient(45deg, var(--accent), #c93d58);">Esborrar</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SCRIPT FUSIONAT -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+        // --- Lògica del NOU disseny: Header scroll effect ---
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) { // Reduït de 100 a 50
+                header.style.padding = '1rem 5%';
+                header.style.background = 'rgba(26, 26, 46, 0.95)';
+            } else {
+                header.style.padding = '2rem 5%';
+                header.style.background = 'rgba(26, 26, 46, 0.8)';
+            }
+        });
+
+        // --- Lògica del NOU disseny: Floating elements ---
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach((el, index) => {
+            const delay = Math.random() * 5;
+            el.style.animationDelay = `${delay}s`;
+        });
+        
+        // --- Lògica de l'ANTIC disseny: Menú Mòbil ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        const navLinksMobile = document.querySelectorAll('#mobile-menu a');
+
+        function toggleMenu() {
+            const isHidden = mobileMenu.style.display === 'none' || mobileMenu.style.display === '';
+            mobileMenu.style.display = isHidden ? 'flex' : 'none';
+            iconOpen.style.display = isHidden ? 'none' : 'block';
+            iconClose.style.display = isHidden ? 'block' : 'none';
+            mobileMenuBtn.setAttribute('aria-expanded', isHidden);
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.style.display === 'flex') {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // --- Lògica de l'ANTIC disseny: Modals ---
+        
+        // Modal d'Alerta
+        const alertModal = document.getElementById('alert-modal');
+        const alertPanel = alertModal.querySelector('[data-modal-panel]');
+        const alertMessage = document.getElementById('alert-message');
+        const alertClose = document.getElementById('alert-close');
+        
+        function showAlert(message) {
+            alertMessage.textContent = message;
+            alertModal.classList.add('flex');
+            setTimeout(() => alertPanel.classList.add('visible'), 10);
+        }
+        
+        function closeAlert() {
+            alertPanel.classList.remove('visible');
+            setTimeout(() => alertModal.classList.remove('flex'), 200);
+        }
+
+        alertClose.addEventListener('click', closeAlert);
+        
+        // Modal de Confirmació
+        const confirmModal = document.getElementById('confirm-modal');
+        const confirmPanel = confirmModal.querySelector('[data-modal-panel]');
+        const confirmMessage = document.getElementById('confirm-message');
+        const confirmCancel = document.getElementById('confirm-cancel');
+        const confirmOk = document.getElementById('confirm-ok');
+        let confirmCallback = null;
+        
+        function showConfirm(message, callback) {
+            confirmMessage.textContent = message;
+            confirmModal.classList.add('flex');
+            setTimeout(() => confirmPanel.classList.add('visible'), 10);
+            confirmCallback = callback;
+        }
+
+        function closeConfirm() {
+            confirmPanel.classList.remove('visible');
+            setTimeout(() => confirmModal.classList.remove('flex'), 200);
+            confirmCallback = null;
+        }
+        
+        confirmCancel.addEventListener('click', closeConfirm);
+        
+        confirmOk.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback();
+            }
+            closeConfirm();
+        });
+
+
+        // --- Lògica de l'ANTIC disseny: Sistema d'Inventari ---
+        
+        // Dades de mostra
+        const sampleData = [
+            {id: 'PC-01', stat: 'operatiu', cpu: 'Intel i5-8400', ram: '16 GB', disc: '512 GB SSD', ubicacio: 'Aula 10', notes: 'Monitor nou.'},
+            {id: 'PC-02', stat: 'reparacio', cpu: 'Intel i3-7100', ram: '8 GB', disc: '256 GB SSD', ubicacio: 'Aula 10', notes: 'Falla la font d\'alimentació.'},
+            {id: 'PC-03', stat: 'operatiu', cpu: 'AMD Ryzen 5 3600', ram: '16 GB', disc: '1 TB NVMe', ubicacio: 'Admin', notes: ''},
+            {id: 'PC-04', stat: 'baixat', cpu: 'Intel Core 2 Duo', ram: '4 GB', disc: '128 GB HDD', ubicacio: 'Magatzem', notes: 'Obsolet, per reciclar.'},
+            {id: 'LAP-01', stat: 'operatiu', cpu: 'Intel i7-1165G7', ram: '16 GB', disc: '512 GB SSD', ubicacio: 'Professorat', notes: ''},
+        ];
+
+        const LS_KEY = 'inventari_equips_v3_dark'; // Nova clau per a la nova versió
+        const tblBody = document.querySelector('#tbl tbody');
+        const form = document.getElementById('form');
+        const search = document.getElementById('search');
+        const stats = document.getElementById('stats');
+        const clearSearchBtn = document.getElementById('clearSearch');
+        const exportCsvBtn = document.getElementById('exportCsv');
+        const importSampleBtn = document.getElementById('importSample');
+        const resetFormBtn = document.getElementById('reset');
+
+        function load() {
+            const raw = localStorage.getItem(LS_KEY);
+            return raw ? JSON.parse(raw) : [];
+        }
+
+        function save(list) {
+            localStorage.setItem(LS_KEY, JSON.stringify(list));
+        }
+        
+        function renderStatusBadge(stat) {
+            const classes = {
+                'operatiu': 'status-operatiu',
+                'reparacio': 'status-reparacio',
+                'baixat': 'status-baixat'
+            };
+            const text = {
+                'operatiu': 'Operatiu',
+                'reparacio': 'En reparació',
+                'baixat': 'Baixat'
+            }
+            return `<span class="status-badge ${classes[stat] || 'status-operatiu'}">${text[stat] || stat}</span>`;
+        }
+        
+        function render(filter = '') {
+            const list = load();
+            tblBody.innerHTML = '';
+            const f = filter.trim().toLowerCase();
+            
+            const filtered = list.filter(it => 
+                !f || 
+                (it.id && it.id.toLowerCase().includes(f)) ||
+                (it.cpu && it.cpu.toLowerCase().includes(f)) ||
+                (it.stat && it.stat.toLowerCase().includes(f)) ||
+                (it.ubicacio && it.ubicacio.toLowerCase().includes(f))
+            );
+
+            if (filtered.length === 0) {
+                 tblBody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.5);">No s'han trobat resultats${f ? ' per a la cerca "' + f + '"' : ''}.</td></tr>`;
+            } else {
+                for (const r of filtered) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="font-weight: 500; color: var(--light);">${r.id}</td>
+                        <td>${renderStatusBadge(r.stat)}</td>
+                        <td>${r.cpu || ''}</td>
+                        <td>${r.ram || ''}</td>
+                        <td>${r.disc || ''}</td>
+                        <td>${r.ubicacio || ''}</td>
+                        <td>
+                            <button data-id="${r.id}" class="btn-action edit">Editar</button>
+                            <button data-id="${r.id}" class="btn-action del">Esborrar</button>
+                        </td>
+                    `;
+                    tblBody.appendChild(tr);
+                }
+            }
+            updateStats();
+        }
+
+        function updateStats() {
+            const list = load();
+            const total = list.length;
+            const oper = list.filter(x => x.stat === 'operatiu').length;
+            const repar = list.filter(x => x.stat === 'reparacio').length;
+            const baixat = list.filter(x => x.stat === 'baixat').length;
+            
+            stats.innerHTML = `
+              <div><span>Total equips:</span> <strong>${total}</strong></div>
+              <div><span>Operatius:</span> <strong style="color: #4ade80;">${oper}</strong></div>
+              <div><span>En reparació:</span> <strong style="color: #facc15;">${repar}</strong></div>
+              <div><span>Baixats:</span> <strong style="color: #f87171;">${baixat}</strong></div>
+            `;
+        }
+        
+        if(form) { // Comprovar que el formulari existeix
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const id = document.getElementById('id').value.trim();
+                if (!id) {
+                    showAlert('El camp "Identificador" és obligatori.');
+                    return;
+                }
+                const item = {
+                    id: id,
+                    stat: document.getElementById('stat').value,
+                    cpu: document.getElementById('cpu').value.trim(),
+                    ram: document.getElementById('ram').value.trim(),
+                    disc: document.getElementById('disc').value.trim(),
+                    ubicacio: document.getElementById('ubicacio').value.trim(),
+                    notes: document.getElementById('notes').value.trim()
+                };
+                
+                let list = load();
+                const existing = list.findIndex(x => x.id === id);
+                
+                if (existing >= 0) {
+                    list[existing] = item;
+                } else {
+                    list.push(item);
+                }
+                save(list);
+                render(search.value);
+                form.reset();
+                document.getElementById('id').readOnly = false;
+            });
+        }
+        
+        if(tblBody) {
+            tblBody.addEventListener('click', e => {
+                const target = e.target;
+                
+                if (target.classList.contains('edit')) {
+                    const id = target.dataset.id;
+                    const item = load().find(x => x.id === id);
+                    if (item) {
+                        document.getElementById('id').value = item.id;
+                        document.getElementById('id').readOnly = true; 
+                        document.getElementById('stat').value = item.stat;
+                        document.getElementById('cpu').value = item.cpu || '';
+                        document.getElementById('ram').value = item.ram || '';
+                        document.getElementById('disc').value = item.disc || '';
+                        document.getElementById('ubicacio').value = item.ubicacio || '';
+                        document.getElementById('notes').value = item.notes || '';
+                        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                if (target.classList.contains('del')) {
+                    const id = target.dataset.id;
+                    showConfirm(`Esteu segurs que voleu esborrar l'equip ${id}? Aquesta acció no es pot desfer.`, () => {
+                        let list = load();
+                        list = list.filter(x => x.id !== id);
+                        save(list);
+                        render(search.value);
+                    });
+                }
+            });
+        }
+
+        if(resetFormBtn) {
+            resetFormBtn.addEventListener('click', () => {
+                form.reset();
+                document.getElementById('id').readOnly = false;
+            });
+        }
+        
+        if(search) {
+            search.addEventListener('input', e => render(e.target.value));
+        }
+        
+        if(clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                search.value = '';
+                render();
+            });
+        }
+        
+        if(exportCsvBtn) {
+            exportCsvBtn.addEventListener('click', () => {
+                const list = load();
+                if (list.length === 0) {
+                    showAlert('No hi ha dades per exportar.');
+                    return;
+                }
+                
+                const headers = Object.keys(list[0]);
+                let csvContent = "data:text/csv;charset=utf-8,";
+                csvContent += headers.join(";") + "\n";
+                
+                list.forEach(row => {
+                    const values = headers.map(header => {
+                        let val = row[header] || '';
+                        val = val.toString().replace(/"/g, '""');
+                        return `"${val}"`;
+                    });
+                    csvContent += values.join(";") + "\n";
+                });
+
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "inventari_woopersindicat.csv");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+        
+        if(importSampleBtn) {
+            importSampleBtn.addEventListener('click', () => {
+                showConfirm("Això carregarà dades de mostra. Si ja teniu dades, es barrejaran. Voleu continuar?", () => {
+                    const current = load();
+                    const toAdd = sampleData.filter(s => !current.some(c => c.id === s.id));
+                    const newList = [...current, ...toAdd];
+                    save(newList);
+                    render();
+                });
+            });
+        }
+
+        // Render inicial de la taula
+        render();
+
+    });
+    </script>
+</body>
+</html>
+
